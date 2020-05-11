@@ -9,12 +9,12 @@ read PROJUSER
 
 # root section
 
-yum install -y mc vim htop
+yum install -y mc vim htop sl
 cd
 echo -e "\nHISTTIMEFORMAT='%F %T > '" >> .bashrc
 
 if yum install -y rlwrap; then
-  su -l $PROJUSER -c 'printf "alias sqlplus=\"rlwrap sqlplus\"" ; exit'
+  su -l $PROJUSER -c 'printf "alias sqlplus=\"rlwrap sqlplus\"" >> .bashrc; exit'
 else
   su -l $PROJUSER -c 'sed -i "s/alias sqlplus/\#alias sqlplus/g" .bashrc ; exit'
 fi
