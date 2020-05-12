@@ -13,6 +13,8 @@ read CHATID
 if [ -n $CHATID ]; then
   echo 'Введите токен бота:'
   read BOTTOKEN
+  echo 'Введите адрес прокси-сервера'
+  read PROXY
 fi
 
 # root section
@@ -29,10 +31,12 @@ if [ -n $CHATID ]; then
   sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_start.sh'
   sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_start.sh'
   sed -i "s/VERSION/$SYSVERSION/g" ~/$PROJUSER'_start.sh'
+  sed -i "s/PROXY/$PROXY/g" ~/$PROJUSER'_start.sh'
   sed -i "s/\#curl/curl/g" ~/$PROJUSER'_stop.sh'
   sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_stop.sh'
   sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_stop.sh'
   sed -i "s/VERSION/$SYSVERSION/g" ~/$PROJUSER'_stop.sh'
+  sed -i "s/PROXY/$PROXY/g" ~/$PROJUSER'_stop.sh'
 
 ## tuning
 
