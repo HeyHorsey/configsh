@@ -6,9 +6,32 @@
 
 echo 'Enter project username:'
 read PROJUSER
-
+echo 'Enter system version'
+read SYSVERSION
+echo 'Если планируется автоматическое логгирование действий в Телеграм — введите id чата (если нет — оставьте поле пустым):'
+read CHATID
+if [ -n $CHATID ]; then
+  echo 'Введите токен бота:'
+  read BOTTOKEN
+fi
 # root section
 
+## scripts setup
+cp scripts/start.sh ~/$PROJUSER'_start.sh'
+cp scripts/stop.sh ~/$PROJUSER'_stop.sh'
+#cp scripts/update.sh ~/$PROJUSER'_update.sh'
+sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_start.sh'
+sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_stop.sh'
+if [ -n $CHATID ]; then
+  sed -i "s/\#curl/curl/g" ~/$PROJUSER'_start.sh'
+  sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_start.sh'
+  sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_start.sh'
+  sed -i "s/\#curl/curl/g" ~/$PROJUSER'_stop.sh'
+  sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_stop.sh'
+  sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_stop.sh'
+
+
+## tuning
 yum install -y mc vim htop sl
 cd
 echo -e "\nHISTTIMEFORMAT='%F %T > '" >> .bashrc
