@@ -37,6 +37,7 @@ if [ -n $CHATID ]; then
   sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_stop.sh'
   sed -i "s/VERSION/$SYSVERSION/g" ~/$PROJUSER'_stop.sh'
   sed -i "s/PROXY/$PROXY/g" ~/$PROJUSER'_stop.sh'
+fi
 
 ## tuning
 
