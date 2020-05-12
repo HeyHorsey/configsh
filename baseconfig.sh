@@ -14,9 +14,11 @@ if [ -n $CHATID ]; then
   echo 'Введите токен бота:'
   read BOTTOKEN
 fi
+
 # root section
 
 ## scripts setup
+
 cp scripts/start.sh ~/$PROJUSER'_start.sh'
 cp scripts/stop.sh ~/$PROJUSER'_stop.sh'
 #cp scripts/update.sh ~/$PROJUSER'_update.sh'
@@ -30,8 +32,8 @@ if [ -n $CHATID ]; then
   sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_stop.sh'
   sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_stop.sh'
 
-
 ## tuning
+
 yum install -y mc vim htop sl
 cd
 echo -e "\nHISTTIMEFORMAT='%F %T > '" >> .bashrc
