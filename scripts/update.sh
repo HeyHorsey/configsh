@@ -38,5 +38,13 @@ su -l PROJ -c '
   #sqlplus -S $DB_USER/$DB_PASSWD@$DB_NAME @ /sql__ee/catalog.sql
   exit
   '
+
 # System start
 PROJ-start.sh
+
+# Deploy payara
+su -l PROJ -c '
+  if ! websmc_payara_deploy; then
+    #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION Payara deploy failed!" PROXY &> /dev/null
+    echo "Payara deploy failed!"
+  exit'
