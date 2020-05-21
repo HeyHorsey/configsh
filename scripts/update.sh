@@ -8,7 +8,6 @@ su -l PROJ -c '
 # stop env
 cd
 PROJ-stop.sh
-pkill -f opt/solvo -u PROJ
 
 # update system
 if ! yum update -y --disblerepo=* --enablerepo=TOSREPO; then
