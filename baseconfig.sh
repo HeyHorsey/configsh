@@ -32,7 +32,7 @@ chmod +x ~/$PROJUSER'_update.sh'
 sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_start.sh'
 sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_stop.sh'
 sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_update.sh'
-sed -i "s/PROJREPO/$PROJREPO/g"  ~/$PROJUSER'_update.sh'
+sed -i "s/TOSREPO/$PROJREPO/g"  ~/$PROJUSER'_update.sh'
 if [ -n $CHATID ]; then
   sed -i "s/\#curl/curl/g" ~/$PROJUSER'_start.sh'
   sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_start.sh'

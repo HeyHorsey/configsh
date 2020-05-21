@@ -11,14 +11,13 @@ PROJ-stop.sh
 pkill -f opt/solvo -u PROJ
 
 # update system
-if ! yum update -y --disblerepo=* --enablerepo=PROJREPO; then
+if ! yum update -y --disblerepo=* --enablerepo=TOSREPO; then
   #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION update failed, please proceed manually!" --proxy1.0 PROXY &> /dev/null
   echo  'PROJ VERSION update failed, please proceed manually!'
   exit 1
 fi
 
 # DB patch
-# shellcheck disable=SC2016
 su -l PROJ -c '
   cd ~/mdd/
   rm patch.sql
