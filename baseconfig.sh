@@ -70,7 +70,7 @@ fi
 echo 'Logging in as' %PROJUSER
 
 su -l $PROJUSER -c '
-  echo -e "\nHISTTIMEFORMAT='%F %T > '" >> .bashrc
+  echo -e "\nHISTTIMEFORMAT=\"%F %T > \"" >> .bashrc
   sed -i "s/ru_RU/en_US/g" .bashrc
   cp bin/jsm_talman bin/jsm_talman_big
   chmod +r bin/jsm_talman_big
