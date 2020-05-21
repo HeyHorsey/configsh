@@ -73,7 +73,7 @@ su -l $PROJUSER -c '
   echo -e "\nHISTTIMEFORMAT=\"%F %T > \"" >> .bashrc
   sed -i "s/ru_RU/en_US/g" .bashrc
   cp bin/jsm_talman bin/jsm_talman_big
-  chmod +r bin/jsm_talman_big
+  chmod +x bin/jsm_talman_big
   sed -i "s/normal\-\*\-13\-\*\-75\-75\-c\-70/normal\-\-20\-200\-75\-75\-c\-100/g" bin/jsm_talman_big
   exit
   '
