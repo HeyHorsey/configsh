@@ -5,10 +5,10 @@ sudo -i -u PROJ websmc_payara_undeploy
 
 # stop env
 cd
-PROJ-stop.sh
+./PROJ_stop.sh
 
 # update system
-if ! yum update -y --disblerepo=* --enablerepo=TOSREPO; then
+if ! yum update -y --disablerepo=* --enablerepo=TOSREPO; then
   #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION update failed, please proceed manually!" --proxy1.0 PROXY &> /dev/null
   echo  'PROJ VERSION update failed, please proceed manually!'
   exit 1
@@ -29,7 +29,7 @@ sudo -i -u PROJ sh -c '#curl -F document=@post_install_sql.err.log https://api.t
 
 
 # System start
-PROJ-start.sh
+./PROJ_start.sh
 
 # Deploy payara
 #sudo -i -u PROJ payaradeploy
