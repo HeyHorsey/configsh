@@ -1,0 +1,5 @@
+#!/bin/bash
+if ! websmc_payara_deploy; then
+  #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION Payara deploy failed!" PROXY &> /dev/null
+  echo "Payara deploy failed!"
+fi

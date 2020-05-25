@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # undeploy payara
-su -l PROJ -c '
-  websmc_payara_undeploy
-  exit'
+sudo -i -u PROJ websmc_payara_undeploy
 
 # stop env
 cd
@@ -17,32 +15,21 @@ if ! yum update -y --disblerepo=* --enablerepo=TOSREPO; then
 fi
 
 # DB patch
-su -l PROJ -c '
-  cd ~/mdd/
-  rm patch.sql
-  make patch.sql
-  rm patch.log
-  rm patch.err.log
-  make dbpatch | tee patch.log
-  grep -5 ORA patch.log > patch.err.log
-  #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please see dbpatch errors for PROJ VERSION" PROXY &> /dev/null
-  #curl -F document=@patch.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null
-  echo "#####\n#####\n#####\n#####\n####"
-  cd
-  post_install_sql &> ~/post_install_sql.log
-  grep -5 ORA ~/post_install_sql.log > post_install_sql.err.log
-  #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please see post_install errors for PROJ VERSION" PROXY &> /dev/null
-  #curl -F document=@post_install_sql.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null
-  #sqlplus -S $DB_USER/$DB_PASSWD@$DB_NAME @ /sql__ee/catalog.sql
-  exit
-  '
+sudo -i -u PROJ sh -c 'cd ~/mdd/ ; rm patch.sql ; make patch.sql ; rm patch.log ; rm patch.err.log ; make dbpatch | tee patch.log ; grep -5 ORA patch.log > patch.err.log'
+sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please see dbpatch errors for PROJ VERSION" PROXY &> /dev/null'
+sudo -i -u PROJ sh -c '#curl -F document=@mdd/patch.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null'
+echo "#####\n#####\n#####\n#####\n####"
+
+# Post install
+sudo -i -u PROJ sh -c 'post_install_sql &> ~/post_install_sql.log'
+sudo -i -u PROJ sh -c 'grep -5 ORA ~/post_install_sql.log > post_install_sql.err.log'
+sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please see post_install errors for PROJ VERSION" PROXY &> /dev/null'
+sudo -i -u PROJ sh -c '#curl -F document=@post_install_sql.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null'
+#sudo -i -u PROJ sh -c 'sqlplus -S $DB_USER/$DB_PASSWD@$DB_NAME @ /sql__ee/catalog.sql
+
 
 # System start
 PROJ-start.sh
 
 # Deploy payara
-su -l PROJ -c '
-  if ! websmc_payara_deploy; then
-    #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION Payara deploy failed!" PROXY &> /dev/null
-    echo "Payara deploy failed!"
-  exit'
+#sudo -i -u PROJ payaradeploy
