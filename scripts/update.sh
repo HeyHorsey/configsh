@@ -27,6 +27,9 @@ sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMe
 sudo -i -u PROJ sh -c '#curl -F document=@post_install_sql.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null'
 #sudo -i -u PROJ sh -c 'sqlplus -S $DB_USER/$DB_PASSWD@$DB_NAME @ /sql__ee/catalog.sql
 
+# Print versions for delivery note
+sudo -i -u PROJ sh -c versions
+sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="$(versions)" PROXY &> /dev/null'
 
 # System start
 ./PROJ_start.sh

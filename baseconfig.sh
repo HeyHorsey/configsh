@@ -28,13 +28,25 @@ cp scripts/stop.sh ~/$PROJUSER'_stop.sh'
 cp scripts/update.sh ~/$PROJUSER'_update.sh'
 PROJDIR=$(sudo -i -u $PROJUSER pwd)
 cp scripts/payaradeploy $PROJDIR/bin/
+cp scripts/versions.sh $PROJDIR/bin/versions
+
 chmod +x ~/$PROJUSER'_start.sh'
 chmod +x ~/$PROJUSER'_stop.sh'
 chmod +x ~/$PROJUSER'_update.sh'
+
 sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_start.sh'
 sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_stop.sh'
 sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_update.sh'
 sed -i "s/TOSREPO/$PROJREPO/g"  ~/$PROJUSER'_update.sh'
+
+sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/payaradeploy
+chmod +x $PROJDIR/bin/payaradeploy
+chown $PROJUSER $PROJDIR/bin/payaradeploy
+
+sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/versions
+chmod +x $PROJDIR/bin/versions
+chown $PROJUSER $PROJDIR/bin/versions
+
 if [ -n $CHATID ]; then
   sed -i "s/\#curl/curl/g" ~/$PROJUSER'_start.sh'
   sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_start.sh'
@@ -48,7 +60,6 @@ if [ -n $CHATID ]; then
   sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_update.sh'
   sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_update.sh'
   sed -i "s/VERSION/$SYSVERSION/g" ~/$PROJUSER'_update.sh'
-  sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/payaradeploy
   sed -i "s/\#curl/curl/g" $PROJDIR/bin/payaradeploy
   sed -i "s/CHATID/$CHATID/g"  $PROJDIR/bin/payaradeploy
   sed -i "s/TOKEN/$BOTTOKEN/g"  $PROJDIR/bin/payaradeploy
@@ -65,8 +76,7 @@ if [ -n $CHATID ]; then
     sed -i "s/PROXY/ /g" $PROJDIR/bin/payaradeploy
   fi
 fi
-chmod +x $PROJDIR/bin/payaradeploy
-chown $PROJUSER $PROJDIR/bin/payaradeploy
+
 
 ## tuning
 
