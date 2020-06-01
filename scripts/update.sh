@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # undeploy payara
-sudo -i -u PROJ websmc_payara_undeploy
+sudo -i -u PROJ sh -c 'websmc_payara_undeploy'
 
 # stop env
 cd
@@ -18,7 +18,7 @@ fi
 sudo -i -u PROJ sh -c 'cd ~/mdd/ ; rm patch.sql ; make patch.sql ; rm patch.log ; rm patch.err.log ; make dbpatch | tee patch.log ; grep -5 ORA patch.log > patch.err.log'
 sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please see dbpatch errors for PROJ VERSION" PROXY &> /dev/null'
 sudo -i -u PROJ sh -c '#curl -F document=@mdd/patch.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null'
-echo "#####\n#####\n#####\n#####\n####"
+echo -e "#####\n#####\n#####\n#####\n####"
 
 # Post install
 until [ $pinst = 'OK' ]
@@ -30,7 +30,7 @@ do
   echo "Please review the error log and type OK to finish or skip to repeat post install"
   read pinst
 done
-#sudo -i -u PROJ sh -c 'sqlplus -S $DB_USER/$DB_PASSWD@$DB_NAME @ /sql__ee/catalog.sql
+#sudo -i -u PROJ sh -c 'sqlplus -S $DB_USER/$DB_PASSWD@$DB_NAME @ /sql_ee/catalog.sql'
 
 # Print versions for delivery note
 sudo -i -u PROJ sh -c versions
