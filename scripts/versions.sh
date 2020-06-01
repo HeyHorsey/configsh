@@ -7,5 +7,6 @@ CVVER=$(rpm -qa --qf '%{VERSION}-%{RELEASE}' ctms_vessel-win32)
 CTVER=$(rpm -qa --qf '%{VERSION}-%{RELEASE}' ctms_train-win32)
 KIOSKVER=$(rpm -qa --qf '%{VERSION}-%{RELEASE}' solvo-KioskPROJ)
 XRDTVER=$(rpm -qa --qf '%{VERSION}-%{RELEASE}' solvo-xrdt-PROJ)
+WEBVER=$(rpm -qa --qf '%{VERSION}-%{RELEASE}' solvo-wnext-PROJ)
 
-echo "UVP:        "$UVPVER "\nWTM:         "$WTMVER "\nWMSMC:       "$SMCVER "\nCTMS VESSEL: "$CVVER "\nCTMS TRAIN:  "$CTVER "\nKIOSK:       "$KIOSKVER "\nXRDT:        "$XRDTVER
+echo "UVP:        "$UVPVER "\nWTM:         "$WTMVER "\nWMSMC:       "$SMCVER "\nCTMS VESSEL: "$CVVER "\nCTMS TRAIN:  "$CTVER "\nKIOSK:       "$KIOSKVER "\nXRDT:        "$XRDTVER "\nWEB PORTAL:  "$WEBVER
