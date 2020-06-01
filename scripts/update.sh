@@ -9,7 +9,7 @@ cd
 
 # update system
 if ! yum update -y --disablerepo=* --enablerepo=TOSREPO; then
-  #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION update failed, please proceed manually!" --proxy1.0 PROXY &> /dev/null
+  #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION update failed, please proceed manually!" PROXY &> /dev/null
   echo  'PROJ VERSION update failed, please proceed manually!'
   exit 1
 fi
