@@ -9,4 +9,4 @@ KIOSKVER=$(rpm -qa --qf '%{VERSION}-%{RELEASE}' solvo-KioskPROJ)
 XRDTVER=$(rpm -qa --qf '%{VERSION}-%{RELEASE}' solvo-xrdt-PROJ)
 WEBVER=$(rpm -qa --qf '%{VERSION}-%{RELEASE}' solvo-wnext-PROJ)
 
-echo "UVP:        "$UVPVER "\nWTM:         "$WTMVER "\nWMSMC:       "$SMCVER "\nCTMS VESSEL: "$CVVER "\nCTMS TRAIN:  "$CTVER "\nKIOSK:       "$KIOSKVER "\nXRDT:        "$XRDTVER "\nWEB PORTAL:  "$WEBVER
+echo -e "UVP:        "$UVPVER "\nWTM:         "$WTMVER "\nWMSMC:       "$SMCVER "\nCTMS VESSEL: "$CVVER "\nCTMS TRAIN:  "$CTVER "\nKIOSK:       "$KIOSKVER "\nXRDT:        "$XRDTVER "\nWEB PORTAL:  "$WEBVER
