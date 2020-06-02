@@ -69,12 +69,11 @@ if [ -n $CHATID ]; then
     sed -i "s/PROXY/--proxy1.0 $PROXY/g" ~/$PROJUSER'_stop.sh'
     sed -i "s/PROXY/--proxy1.0 $PROXY/g" ~/$PROJUSER'_update.sh'
     sed -i "s/PROXY/--proxy1.0 $PROXY/g" $PROJDIR/bin/payaradeploy
-  else
-    sed -i "s/PROXY/ /g" ~/$PROJUSER'_start.sh'
-    sed -i "s/PROXY/ /g" ~/$PROJUSER'_stop.sh'
-    sed -i "s/PROXY/ /g" ~/$PROJUSER'_update.sh'
-    sed -i "s/PROXY/ /g" $PROJDIR/bin/payaradeploy
   fi
+  sed -i "s/PROXY/ /g" ~/$PROJUSER'_start.sh'
+  sed -i "s/PROXY/ /g" ~/$PROJUSER'_stop.sh'
+  sed -i "s/PROXY/ /g" ~/$PROJUSER'_update.sh'
+  sed -i "s/PROXY/ /g" $PROJDIR/bin/payaradeploy
 fi
 
 
