@@ -12,7 +12,7 @@ echo 'Enter system repo name:'
 read PROJREPO
 echo 'If planning to send logs via Telegram enter chat id (leave blank if not needed):'
 read CHATID
-if [ -n $CHATID ]; then
+if ! [ -z "$CHATID" ]; then
   echo 'Enter bot token:'
   read BOTTOKEN
   echo 'Enter Telegram proxy address if needed (leave blank if not):'
@@ -47,7 +47,7 @@ sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/versions
 chmod +x $PROJDIR/bin/versions
 chown $PROJUSER $PROJDIR/bin/versions
 
-if [ -n $CHATID ]; then
+if ! [ -z "$CHATID" ]; then
   sed -i "s/\#curl/curl/g" ~/$PROJUSER'_start.sh'
   sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_start.sh'
   sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_start.sh'
@@ -64,7 +64,7 @@ if [ -n $CHATID ]; then
   sed -i "s/CHATID/$CHATID/g"  $PROJDIR/bin/payaradeploy
   sed -i "s/TOKEN/$BOTTOKEN/g"  $PROJDIR/bin/payaradeploy
   sed -i "s/VERSION/$SYSVERSION/g" $PROJDIR/bin/payaradeploy
-  if [ -n $PROXY ]; then
+  if ! [ -z "$PROXY" ]; then
     sed -i "s/PROXY/--proxy1.0 $PROXY/g" ~/$PROJUSER'_start.sh'
     sed -i "s/PROXY/--proxy1.0 $PROXY/g" ~/$PROJUSER'_stop.sh'
     sed -i "s/PROXY/--proxy1.0 $PROXY/g" ~/$PROJUSER'_update.sh'
