@@ -21,7 +21,7 @@ sudo -i -u PROJ sh -c '#curl -F document=@mdd/patch.err.log https://api.telegram
 echo -e "#####\n#####\n#####\n#####\n####"
 
 # Post install
-until [ $pinst = 'OK' ]
+until [ "$pinst" == "OK" ]
 do
   sudo -i -u PROJ sh -c 'post_install_sql &> ~/post_install_sql.log'
   sudo -i -u PROJ sh -c 'grep -5 ORA ~/post_install_sql.log > post_install_sql.err.log'
