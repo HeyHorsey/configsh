@@ -8,11 +8,16 @@ cd
 ./PROJ_stop.sh
 
 # update system
-if ! yum update -y --disablerepo=* --enablerepo=TOSREPO; then
-  #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION update failed, please proceed manually!" PROXY &> /dev/null
-  echo  'PROJ VERSION update failed, please proceed manually!'
-  exit 1
-fi
+
+until [ "$sinst" == "OK" ]
+do
+  if ! yum update -y --disablerepo=* --enablerepo=TOSREPO; then
+    #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION update failed, please proceed manually!" PROXY &> /dev/null
+    echo  'PROJ VERSION update failed, please proceed manually!'
+    exit 1
+  fi
+  read sinst
+done
 
 # DB patch
 sudo -i -u PROJ sh -c 'cd ~/mdd/ ; rm patch.sql ; make patch.sql ; rm patch.log ; rm patch.err.log ; make dbpatch | tee patch.log ; grep -5 ORA patch.log > patch.err.log'
