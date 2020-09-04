@@ -11,7 +11,7 @@ cd
 
 until [ "$sinst" == "OK" ]
 do
-  if ! yum update -y --disablerepo=* --enablerepo=TOSREPO; then
+  if ! yum update -y --disablerepo=* --enablerepo=TOSREPO $1; then
     #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION update failed, please proceed manually!" PROXY &> /dev/null
     echo  'PROJ VERSION update failed, please proceed manually!'
     exit 1
