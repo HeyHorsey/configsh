@@ -25,14 +25,13 @@ sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMe
 sudo -i -u PROJ sh -c '#curl -F document=@mdd/patch.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null'
 
 # Post install
-until [ "$pinst" == "OK" ]
+until [ "$pinst" == "$(sudo -i -u PROJ sh -c 'md5sum post_install_sql.err.log')" ]
 do
   sudo -i -u PROJ sh -c 'post_install_sql &> ~/post_install_sql.log'
   sudo -i -u PROJ sh -c 'grep -5 ORA ~/post_install_sql.log > post_install_sql.err.log'
-  sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="$(md5sum post_install_sql.err.log)" &> /dev/null'
+  sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please review post_install error log." &> /dev/null'
   sudo -i -u PROJ sh -c '#curl -F document=@post_install_sql.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null'
-  echo "Please review the error log and type OK to finish or skip to repeat post install"
-  read pinst
+  export pinst="$(sudo -i -u PROJ sh -c 'md5sum post_install_sql.err.log')"
 done
 #sudo -i -u PROJ sh -c 'sqlplus -S $DB_USER/$DB_PASSWD@$DB_NAME @ /sql_ee/catalog.sql'
 
