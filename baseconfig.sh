@@ -1,5 +1,5 @@
 #!/bin/sh
-# This is a basic setup script for Solvo environment
+# This is a basic setup script for Solvo 7.x environment
 
 
 # Project section
@@ -15,8 +15,6 @@ read CHATID
 if ! [ -z "$CHATID" ]; then
   echo 'Enter bot token:'
   read BOTTOKEN
-  echo 'Enter Telegram proxy address if needed (leave blank if not):'
-  read PROXY
 fi
 
 # root section
@@ -64,16 +62,6 @@ if ! [ -z "$CHATID" ]; then
   sed -i "s/CHATID/$CHATID/g"  $PROJDIR/bin/payaradeploy
   sed -i "s/TOKEN/$BOTTOKEN/g"  $PROJDIR/bin/payaradeploy
   sed -i "s/VERSION/$SYSVERSION/g" $PROJDIR/bin/payaradeploy
-  if ! [ -z "$PROXY" ]; then
-    sed -i "s/PROXY/--proxy1.0 $PROXY/g" ~/$PROJUSER'_start.sh'
-    sed -i "s/PROXY/--proxy1.0 $PROXY/g" ~/$PROJUSER'_stop.sh'
-    sed -i "s/PROXY/--proxy1.0 $PROXY/g" ~/$PROJUSER'_update.sh'
-    sed -i "s/PROXY/--proxy1.0 $PROXY/g" $PROJDIR/bin/payaradeploy
-  fi
-  sed -i "s/PROXY/ /g" ~/$PROJUSER'_start.sh'
-  sed -i "s/PROXY/ /g" ~/$PROJUSER'_stop.sh'
-  sed -i "s/PROXY/ /g" ~/$PROJUSER'_update.sh'
-  sed -i "s/PROXY/ /g" $PROJDIR/bin/payaradeploy
 fi
 
 
