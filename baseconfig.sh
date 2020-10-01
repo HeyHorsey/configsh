@@ -27,6 +27,7 @@ cp scripts/update.sh ~/$PROJUSER'_update.sh'
 PROJDIR=$(sudo -i -u $PROJUSER pwd)
 cp scripts/payaradeploy $PROJDIR/bin/
 cp scripts/versions.sh $PROJDIR/bin/versions
+cp scripts/postinstall $PROJDIR/bin/
 
 chmod +x ~/$PROJUSER'_start.sh'
 chmod +x ~/$PROJUSER'_stop.sh'
@@ -45,6 +46,10 @@ sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/versions
 chmod +x $PROJDIR/bin/versions
 chown $PROJUSER $PROJDIR/bin/versions
 
+sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/postinstall
+chmod +x $PROJDIR/bin/postinstall
+chown $PROJUSER $PROJDIR/bin/postinstall
+
 if ! [ -z "$CHATID" ]; then
   sed -i "s/\#curl/curl/g" ~/$PROJUSER'_start.sh'
   sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_start.sh'
@@ -62,6 +67,10 @@ if ! [ -z "$CHATID" ]; then
   sed -i "s/CHATID/$CHATID/g"  $PROJDIR/bin/payaradeploy
   sed -i "s/TOKEN/$BOTTOKEN/g"  $PROJDIR/bin/payaradeploy
   sed -i "s/VERSION/$SYSVERSION/g" $PROJDIR/bin/payaradeploy
+  sed -i "s/\#curl/curl/g" $PROJDIR/bin/postinstall
+  sed -i "s/CHATID/$CHATID/g"  $PROJDIR/bin/postinstall
+  sed -i "s/TOKEN/$BOTTOKEN/g"  $PROJDIR/bin/postinstall
+  sed -i "s/VERSION/$SYSVERSION/g" $PROJDIR/bin/postinstall
 fi
 
 

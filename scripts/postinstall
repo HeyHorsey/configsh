@@ -1,0 +1,19 @@
+#!/bin/bash
+# Post install
+export pinst="no match"
+export enough="f"
+export pcount=1
+until [ "$enough" == "t" ]
+do
+ echo "Running post_install $pcount"
+ let pcount++
+ post_install_sql &> ~/post_install_sql.log
+ grep -5 ORA ~/post_install_sql.log > post_install_sql.err.log
+ sed -i /^Elapsed/d post_install_sql.err.log
+ if [ "$pinst" == "$(md5sum post_install_sql.err.log)" ] ; then
+ export enough="t"
+ fi
+ export pinst="$(md5sum post_install_sql.err.log)"
+done
+#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please review post_install error log." &> /dev/null
+#curl -F document=@post_install_sql.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null
