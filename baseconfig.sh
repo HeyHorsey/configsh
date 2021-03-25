@@ -95,6 +95,8 @@ sudo -i -u $PROJUSER sh -c 'sed -i "s/ru_RU/en_US/g" .bashrc'
 sudo -i -u $PROJUSER sh -c 'cp bin/jsm_talman bin/jsm_talman_big'
 sudo -i -u $PROJUSER sh -c 'chmod +x bin/jsm_talman_big'
 sudo -i -u $PROJUSER sh -c 'sed -i "s/normal\-\*\-13\-\*\-75\-75\-c\-70/normal\-\-20\-200\-75\-75\-c\-100/g" bin/jsm_talman_big'
+sudo -i -u $PROJUSER sh -c 'ln -s /usr/local/TOS/AET/.local/share/Solvo/wtm/logs tmp/watch/wtm'
+sudo -i -u $PROJUSER sh -c 'ln -s /usr/local/TOS/AET/.local/share/Solvo/wtm/logs tmp/watch/wtm'
 
 # Finished
 echo 'Done, please review scripts'

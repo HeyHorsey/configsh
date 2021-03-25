@@ -22,7 +22,7 @@ done
 
 # DB patch
 sudo -i -u PROJ sh -c 'cd ~/mdd/ ; rm patch.sql ; make patch.sql ; rm patch.log ; rm patch.err.log ; make dbpatch | tee patch.log ; grep -5 ORA patch.log > patch.err.log'
-sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please see dbpatch errors for PROJ VERSION" &> /dev/null'
+sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please review dbpatch errors for PROJ VERSION" &> /dev/null'
 sudo -i -u PROJ sh -c '#curl -F document=@mdd/patch.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null'
 
 # Post install
