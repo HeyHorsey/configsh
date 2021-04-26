@@ -85,6 +85,7 @@ if yum install -y rlwrap; then
 else
   sudo -i -u $PROJUSER sh -c 'sed -i "s/alias sqlplus/\#alias sqlplus/g" .bashrc ; exit'
 fi
+hostnamectl set-hostname $PROJUSER-$SYSVERSION
 
 # User section
 
