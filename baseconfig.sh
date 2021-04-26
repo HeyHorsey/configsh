@@ -10,6 +10,8 @@ echo 'Enter system version'
 read SYSVERSION
 echo 'Enter system repo name:'
 read PROJREPO
+echo 'Enter hostname (no dots):'
+read HOSTNAME
 echo 'If planning to send logs via Telegram enter chat id (leave blank if not needed):'
 read CHATID
 if ! [ -z "$CHATID" ]; then
@@ -85,7 +87,7 @@ if yum install -y rlwrap; then
 else
   sudo -i -u $PROJUSER sh -c 'sed -i "s/alias sqlplus/\#alias sqlplus/g" .bashrc ; exit'
 fi
-hostnamectl set-hostname $PROJUSER-$SYSVERSION
+hostnamectl set-hostname $HOSTNAME
 
 # User section
 
