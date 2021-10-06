@@ -9,6 +9,7 @@ cd
 
 # update system
 
+export sinst="not ok"
 until [ "$sinst" == "OK" ]
 do
   yum clean all
@@ -17,6 +18,7 @@ do
     echo  'PROJ VERSION update failed, please proceed manually!'
     exit 1
   fi
+  echo "Type OK to continue or skip to repeat"
   read sinst
 done
 
