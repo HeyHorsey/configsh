@@ -7,7 +7,7 @@
 echo 'Enter project username:'
 read PROJUSER
 echo 'Enter system version'
-read SYSVERSION
+read SYSVERSION  #no dots
 echo 'Enter system repo name:'
 read PROJREPO
 echo 'If planning to send logs via Telegram enter chat id (leave blank if not needed):'
