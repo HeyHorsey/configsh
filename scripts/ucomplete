@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo -e "Update complete. Current version build time is $(rpm -qa --qf '%{BUILDTIME:date}' dms-PROJ-release)"

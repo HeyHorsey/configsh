@@ -40,4 +40,7 @@ sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMe
 ./PROJ_start.sh
 
 # Deploy payara
-#sudo -i -u PROJ payaradeploy
+sudo -i -u PROJ payaradeploy
+
+# Finish
+sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="$(ucomplete)" &> /dev/null'

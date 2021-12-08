@@ -28,6 +28,7 @@ PROJDIR=$(sudo -i -u $PROJUSER pwd)
 cp scripts/payaradeploy $PROJDIR/bin/
 cp scripts/versions.sh $PROJDIR/bin/versions
 cp scripts/postinstall $PROJDIR/bin/
+cp scripts/ucomplete $PROJDIR/bin/
 
 chmod +x ~/$PROJUSER'_start.sh'
 chmod +x ~/$PROJUSER'_stop.sh'
@@ -41,6 +42,10 @@ sed -i "s/TOSREPO/$PROJREPO/g"  ~/$PROJUSER'_update.sh'
 sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/payaradeploy
 chmod +x $PROJDIR/bin/payaradeploy
 chown $PROJUSER $PROJDIR/bin/payaradeploy
+
+sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/ucomplete
+chmod +x $PROJDIR/bin/ucomplete
+chown $PROJUSER $PROJDIR/bin/ucomplete
 
 sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/versions
 chmod +x $PROJDIR/bin/versions
