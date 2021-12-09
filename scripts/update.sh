@@ -14,7 +14,7 @@ until [ "$sinst" == "OK" ]
 do
   yum clean all
   if ! yum update -y --disablerepo=* --enablerepo=TOSREPO $@; then
-    #curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="PROJ VERSION update failed, please proceed manually!" &> /dev/null
+    sudo -i -u PROJ sh -c '#tgmesg "PROJ VERSION update failed, please proceed manually!"'
     echo  'PROJ VERSION update failed, please proceed manually!'
     exit 1
   fi
@@ -23,18 +23,17 @@ do
 done
 
 # DB patch
-sudo -i -u PROJ sh -c 'cd ~/mdd/ ; rm patch.sql ; make patch.sql ; rm patch.log ; rm patch.err.log ; make dbpatch | tee patch.log ; grep -5 ORA-|SP- patch.log > patch.err.log'
-sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please review dbpatch errors for PROJ VERSION" &> /dev/null'
-sudo -i -u PROJ sh -c '#curl -F document=@mdd/patch.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null'
+sudo -i -u PROJ sh -c dbpatch
 
 # Post install
 sudo -i -u PROJ sh -c postinstall
 
+# Additional sql patches (optional)
 #sudo -i -u PROJ sh -c 'sqlplus -S $DB_USER/$DB_PASSWD@$DB_NAME @ /sql_ee/catalog.sql'
 
 # Print versions for delivery note
 sudo -i -u PROJ sh -c versions
-sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="$(versions)" &> /dev/null'
+sudo -i -u PROJ sh -c '#tgmesg "$(versions)"'
 
 # System start
 ./PROJ_start.sh
@@ -43,4 +42,4 @@ sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMe
 sudo -i -u PROJ payaradeploy
 
 # Finish
-sudo -i -u PROJ sh -c '#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="$(ucomplete)" &> /dev/null'
+sudo -i -u PROJ sh -c '#tgmesg "$(ucomplete)"'

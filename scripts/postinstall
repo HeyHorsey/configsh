@@ -15,5 +15,5 @@ do
  fi
  export pinst="$(md5sum post_install_sql.err.log)"
 done
-#curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="Please review post_install error log." &> /dev/null
-#curl -F document=@post_install_sql.err.log https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null
+#tgmesg "Please review post_install error log."
+#tgfile post_install_sql.err.log

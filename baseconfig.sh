@@ -21,63 +21,57 @@ fi
 
 ## scripts setup
 
+sed -i "s/PROJ/$PROJUSER/g"  ~/scripts/*
+sed -i "s/TOSREPO/$PROJREPO/g"  ~/scripts/*
+if ! [ -z "$CHATID" ]; then
+  sed -i "s/\#curl/curl/g" ~/scripts/*
+  sed -i "s/CHATID/$CHATID/g"  ~/scripts/*
+  sed -i "s/TOKEN/$BOTTOKEN/g"  ~/scripts/*
+  sed -i "s/VERSION/$SYSVERSION/g" ~/scripts/*
+  sed -i "s/\#tg/tg/g" ~/scripts/*
+fi
+
+## Root scripts move
+
 cp scripts/start.sh ~/$PROJUSER'_start.sh'
 cp scripts/stop.sh ~/$PROJUSER'_stop.sh'
 cp scripts/update.sh ~/$PROJUSER'_update.sh'
-PROJDIR=$(sudo -i -u $PROJUSER pwd)
-cp scripts/payaradeploy $PROJDIR/bin/
-cp scripts/versions.sh $PROJDIR/bin/versions
-cp scripts/postinstall $PROJDIR/bin/
-cp scripts/ucomplete $PROJDIR/bin/
 
 chmod +x ~/$PROJUSER'_start.sh'
 chmod +x ~/$PROJUSER'_stop.sh'
 chmod +x ~/$PROJUSER'_update.sh'
 
-sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_start.sh'
-sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_stop.sh'
-sed -i "s/PROJ/$PROJUSER/g"  ~/$PROJUSER'_update.sh'
-sed -i "s/TOSREPO/$PROJREPO/g"  ~/$PROJUSER'_update.sh'
+## User scripts move
 
-sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/payaradeploy
+PROJDIR=$(sudo -i -u $PROJUSER pwd)
+
+cp scripts/payaradeploy $PROJDIR/bin/
 chmod +x $PROJDIR/bin/payaradeploy
 chown $PROJUSER $PROJDIR/bin/payaradeploy
 
-sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/ucomplete
+cp scripts/ucomplete $PROJDIR/bin/
 chmod +x $PROJDIR/bin/ucomplete
 chown $PROJUSER $PROJDIR/bin/ucomplete
 
-sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/versions
+cp scripts/versions.sh $PROJDIR/bin/versions
 chmod +x $PROJDIR/bin/versions
 chown $PROJUSER $PROJDIR/bin/versions
 
-sed -i "s/PROJ/$PROJUSER/g" $PROJDIR/bin/postinstall
+cp scripts/postinstall $PROJDIR/bin/
 chmod +x $PROJDIR/bin/postinstall
 chown $PROJUSER $PROJDIR/bin/postinstall
 
-if ! [ -z "$CHATID" ]; then
-  sed -i "s/\#curl/curl/g" ~/$PROJUSER'_start.sh'
-  sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_start.sh'
-  sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_start.sh'
-  sed -i "s/VERSION/$SYSVERSION/g" ~/$PROJUSER'_start.sh'
-  sed -i "s/\#curl/curl/g" ~/$PROJUSER'_stop.sh'
-  sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_stop.sh'
-  sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_stop.sh'
-  sed -i "s/VERSION/$SYSVERSION/g" ~/$PROJUSER'_stop.sh'
-  sed -i "s/\#curl/curl/g" ~/$PROJUSER'_update.sh'
-  sed -i "s/CHATID/$CHATID/g"  ~/$PROJUSER'_update.sh'
-  sed -i "s/TOKEN/$BOTTOKEN/g"  ~/$PROJUSER'_update.sh'
-  sed -i "s/VERSION/$SYSVERSION/g" ~/$PROJUSER'_update.sh'
-  sed -i "s/\#curl/curl/g" $PROJDIR/bin/payaradeploy
-  sed -i "s/CHATID/$CHATID/g"  $PROJDIR/bin/payaradeploy
-  sed -i "s/TOKEN/$BOTTOKEN/g"  $PROJDIR/bin/payaradeploy
-  sed -i "s/VERSION/$SYSVERSION/g" $PROJDIR/bin/payaradeploy
-  sed -i "s/\#curl/curl/g" $PROJDIR/bin/postinstall
-  sed -i "s/CHATID/$CHATID/g"  $PROJDIR/bin/postinstall
-  sed -i "s/TOKEN/$BOTTOKEN/g"  $PROJDIR/bin/postinstall
-  sed -i "s/VERSION/$SYSVERSION/g" $PROJDIR/bin/postinstall
-fi
+cp scripts/dbpatch $PROJDIR/bin/
+chmod +x $PROJDIR/bin/dbpatch
+chown $PROJUSER $PROJDIR/bin/dbpatch
 
+cp scripts/tgmesg $PROJDIR/bin/
+chmod +x $PROJDIR/bin/tgmesg
+chown $PROJUSER $PROJDIR/bin/tgmesg
+
+cp scripts/tgfile $PROJDIR/bin/
+chmod +x $PROJDIR/bin/tgfile
+chown $PROJUSER $PROJDIR/bin/tgfile
 
 ## tuning
 

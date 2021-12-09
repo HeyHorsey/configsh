@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -F document=@$@ https://api.telegram.org/botTOKEN/sendDocument?chat_id=CHATID &> /dev/null

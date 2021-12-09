@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -s -X POST https://api.telegram.org/botTOKEN/sendMessage -d chat_id=CHATID -d text="$@" &> /dev/null
