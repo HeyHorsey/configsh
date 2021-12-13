@@ -73,6 +73,10 @@ cp scripts/tgfile $PROJDIR/bin/
 chmod +x $PROJDIR/bin/tgfile
 chown $PROJUSER $PROJDIR/bin/tgfile
 
+printf "sqlplus $DB_USER/$DB_PASSWD@$DB_NAME $@" > $PROJDIR/bin/dblogin
+chmod +x $PROJDIR/bin/dblogin
+chown $PROJUSER $PROJDIR/bin/dblogin
+
 ## tuning
 
 yum install -y mc vim htop sl
