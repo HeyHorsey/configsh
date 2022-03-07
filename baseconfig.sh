@@ -21,14 +21,14 @@ fi
 
 ## scripts setup
 
-sed -i "s/PROJ/$PROJUSER/g"  ~/scripts/*
-sed -i "s/TOSREPO/$PROJREPO/g"  ~/scripts/*
+sed -i "s/PROJ/$PROJUSER/g"  scripts/*
+sed -i "s/TOSREPO/$PROJREPO/g"  scripts/*
 if ! [ -z "$CHATID" ]; then
-  sed -i "s/\#curl/curl/g" ~/scripts/*
-  sed -i "s/CHATID/$CHATID/g"  ~/scripts/*
-  sed -i "s/TOKEN/$BOTTOKEN/g"  ~/scripts/*
-  sed -i "s/VERSION/$SYSVERSION/g" ~/scripts/*
-  sed -i "s/\#tg/tg/g" ~/scripts/*
+  sed -i "s/\#curl/curl/g" scripts/*
+  sed -i "s/CHATID/$CHATID/g"  scripts/*
+  sed -i "s/TOKEN/$BOTTOKEN/g"  scripts/*
+  sed -i "s/VERSION/$SYSVERSION/g" scripts/*
+  sed -i "s/\#tg/tg/g" scripts/*
 fi
 
 ## Root scripts move
@@ -73,7 +73,6 @@ cp scripts/tgfile $PROJDIR/bin/
 chmod +x $PROJDIR/bin/tgfile
 chown $PROJUSER $PROJDIR/bin/tgfile
 
-printf "sqlplus $DB_USER/$DB_PASSWD@$DB_NAME $@" > $PROJDIR/bin/dblogin
 chmod +x $PROJDIR/bin/dblogin
 chown $PROJUSER $PROJDIR/bin/dblogin
 

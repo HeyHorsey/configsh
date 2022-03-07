@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sqlplus $DB_USER/$DB_PASSWD@$DB_NAME $@
