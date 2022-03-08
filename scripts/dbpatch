@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/mdd/ ; rm patch.sql ; make patch.sql ; rm patch.log ; rm patch.err.log ; make dbpatch | tee patch.log ; grep -5 ORA-|SP- patch.log > patch.err.log
+cd ~/mdd/ ; rm patch.sql ; make patch.sql ; rm patch.log ; rm patch.err.log ; make dbpatch | tee patch.log ; grep -5 ORA patch.log > patch.err.log
 tgmesg "Please review dbpatch errors for PROJ VERSION"
 tgfile patch.err.log
 cd
