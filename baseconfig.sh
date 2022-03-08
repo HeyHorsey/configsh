@@ -73,6 +73,7 @@ cp scripts/tgfile $PROJDIR/bin/
 chmod +x $PROJDIR/bin/tgfile
 chown $PROJUSER $PROJDIR/bin/tgfile
 
+cp scripts/dblogin $PROJDIR/bin/
 chmod +x $PROJDIR/bin/dblogin
 chown $PROJUSER $PROJDIR/bin/dblogin
 
